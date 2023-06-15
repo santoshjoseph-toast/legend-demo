@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import { observable } from "@legendapp/state"
 import './App.css';
+import Counter from './components/Counter';
+import LegandCounter1 from './components/LegendCounter1';
+import LegandCounter2 from './components/LegendCounter2';
+import LegandCounterContext from './components/LegendCounterContext';
+import StateContext, {State} from './components/StateContext';
+import CounterOptimzed from './components/CounterOptimzed';
+
+const state = observable<State>({ count: 0 })
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Counter />
+     <CounterOptimzed />
+     <LegandCounter1 />
+     <LegandCounter2 />
+     <StateContext.Provider value={state}>
+        <LegandCounterContext />
+     </StateContext.Provider>
     </div>
   );
 }
