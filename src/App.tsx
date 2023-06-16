@@ -1,25 +1,27 @@
 import React from 'react';
 import { observable } from "@legendapp/state"
 import './App.css';
-import Counter from './components/Counter';
-import LegandCounter1 from './components/LegendCounter1';
-import LegandCounter2 from './components/LegendCounter2';
-import LegandCounterContext from './components/LegendCounterContext';
-import StateContext, {State} from './components/StateContext';
-import CounterOptimzed from './components/CounterOptimzed';
+import Counter from './components/React/Counter';
+import LegandCounter from './components/Legend/LegendCounter';
+import LegandCounterGranular from './components/Legend/LegandCounterGranular';
+import LegendStateContext from './components/StateContext';
+import MultipleCounters from './components/React/MultipleCounters';
+import {State} from './components/State';
+import LegandWithContext from './components/Legend/LegendWithContext';
 
-const state = observable<State>({ count: 0 })
+// @ts-ignore
+const legendState = observable<State>({ count: 0, inc: () => legendState.count.set(prev => prev + 1) })
 
 function App() {
   return (
     <div className="App">
      <Counter />
-     <CounterOptimzed />
-     <LegandCounter1 />
-     <LegandCounter2 />
-     <StateContext.Provider value={state}>
-        <LegandCounterContext />
-     </StateContext.Provider>
+     <MultipleCounters />
+     <LegandCounter />
+     <LegandCounterGranular />
+     <LegendStateContext.Provider value={legendState}>
+        <LegandWithContext />
+     </LegendStateContext.Provider>
     </div>
   );
 }
