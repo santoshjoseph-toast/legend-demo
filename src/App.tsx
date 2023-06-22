@@ -8,7 +8,14 @@ import LegendStateContext from './components/StateContext';
 import MultipleCounters from './components/React/MultipleCounters';
 import LegandWithContext from './components/Legend/LegendWithContext';
 
-const legendState = observable({ count: 0, inc: () => legendState.count.set(prev => prev + 1) })
+const legendState = observable({ 
+  count: 0, 
+  inc: () => legendState.count.set(prev => prev + 1),
+  childrenState: {
+    count1: 0,
+    count2: 0
+  } 
+})
 
 function App() {
   return (
